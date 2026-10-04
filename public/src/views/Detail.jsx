@@ -4,31 +4,31 @@ import { useParams } from "react-router";
 import axios from 'axios'
 import { useEffect, useState } from 'react'
 import baseUrl from '../constant/baseUrl'
+import background from "../../assets/image.png"
+
 
 export default function Detail() {
-  const {id} = useParams()
+  const { id } = useParams()
 
   const [movie, setMovie] = useState({})
   async function fetchMovie() {
-        try {
-            const { data } = await axios.get(`${baseUrl}/pub/movies/${id}`)
-            setMovie(data.data)
-            console.log(data.data);
-        } catch (error) {
-            console.log(error);
-        }
+    try {
+      const { data } = await axios.get(`${baseUrl}/pub/movies/${id}`)
+      setMovie(data.data)
+      console.log(data.data);
+    } catch (error) {
+      console.log(error);
     }
-  
-   useEffect(() => {
-        fetchMovie()
-    }, [movie])
+  }
+
+  useEffect(() => {
+    fetchMovie()
+  }, [movie])
   return (
 
     <div
-      className="min-h-screen bg-cover bg-center text-white"
-      style={{
-        backgroundImage: "url('../assets/image.png')",
-      }}
+      className="min-h-screen bg-cover bg-center bg-fixed text-white flex justify-center items-center px-6 pt-32 pb-10"
+      style={{ backgroundImage: `url(${background})` }}
     >
       {/* <Navbar /> */}
 
@@ -44,7 +44,7 @@ export default function Detail() {
 
           <div className="w-full md:flex-1 min-w-0">
             <div className="inline-block mb-4 rounded-full bg-teal-600 px-4 py-1 text-xl">
-              {`rating: ${movie.rating}` }
+              {`rating: ${movie.rating}`}
             </div>
 
             <h1 className="mb-4 text-3xl md:text-3xl font-semibold leading-tight">

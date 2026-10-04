@@ -3,6 +3,7 @@ import axios from 'axios'
 import { useEffect, useState } from 'react'
 import baseUrl from '../constant/baseUrl'
 import Card from '../components/Card'
+import background from "../../assets/image.png"
 
 export default function Home() {
     const [movies, setMovies] = useState([])
@@ -52,10 +53,8 @@ export default function Home() {
     return (
         <>
             <div
-                className="min-h-screen bg-cover bg-center bg-fixed text-white"
-                style={{
-                    backgroundImage: "url('../assets/image.png')",
-                }}>
+                className="min-h-screen bg-cover bg-center bg-fixed text-white flex justify-center items-center px-6 pt-32 pb-10"
+                style={{ backgroundImage: `url(${background})` }}>
                 <meta charSet="UTF-8" />
                 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
                 {/* <Navbar /> */}
