@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <title>Document</title>
+</head>
+
+<body
+    class="bg-[url(./assets/image.png)] bg-cover bg-center text-white min-h-screen flex items-center justify-center p-6">
+
+
+    <div class="w-full max-w-2xl">
+        <div
+            class="w-full bg-white rounded-lg p-10 sm:p-14 shadow-[0_0_30px_rgba(255,255,255,0.7)] dark:bg-transparent">
+            <form class="space-y-6" action="#">
+                <h3 class="text-3xl font-medium text-gray-900 dark:text-white">
+                    Add Movie
+                </h3>
+
+                <div>
+                    <label for="title" class="text-lg font-medium text-gray-900 block mb-2 dark:text-gray-300">
+                        Movie title
+                    </label>
+                    <input type="text" name="title" id="title" placeholder="Title"
+                        class="bg-[#0d0d0d] border border-gray-500 text-white text-lg rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                        required />
+                </div>
+
+                <div>
+                    <label for="genre" class="text-lg font-medium text-gray-900 block mb-2 dark:text-gray-300">
+                        Movie genre
+                    </label>
+                    <input type="text" name="genre" id="genre" placeholder="Genre"
+                        class="bg-[#0d0d0d] border border-gray-500 text-white text-lg rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                        required />
+                </div>
+
+                <div>
+                    <label for="imageUrl" class="text-lg font-medium text-gray-900 block mb-2 dark:text-gray-300">
+                        Image URL
+                    </label>
+                    <input type="text" name="imageUrl" id="imageUrl" placeholder="Image URL"
+                        class="bg-[#0d0d0d] border border-gray-500 text-white text-lg rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                        required />
+                </div>
+
+                <div>
+                    <label for="trailerUrl" class="text-lg font-medium text-gray-900 block mb-2 dark:text-gray-300">
+                        Trailer URL
+                    </label>
+                    <input type="text" name="trailerUrl" id="trailerUrl" placeholder="Trailer URL"
+                        class="bg-[#0d0d0d] border border-gray-500 text-white text-lg rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                        required />
+                </div>
+
+                <div>
+                    <label for="synopsis" class="text-lg font-medium text-gray-900 block mb-2 dark:text-gray-300">
+                        Synopsis
+                    </label>
+                    <textarea name="synopsis" id="synopsis" rows="4" placeholder="Synopsis"
+                        class="bg-[#0d0d0d] border border-gray-500 text-white text-lg rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 resize-y"
+                        required></textarea>
+                </div>
+
+                <button type="submit"
+                    class="w-full text-white bg-[#0d0d0d] hover:bg-gray-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-lg px-5 py-2.5 text-center">
+                    Add Movie
+                </button>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>
