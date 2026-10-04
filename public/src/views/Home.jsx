@@ -18,12 +18,14 @@ export default function Home() {
         let result = []
         for (let i = 1; i <= totalPage; i++) {
             result.push(i)
-
         }
         return result
     }
+
     async function handleSearch(e) {
         e.preventDefault()
+        // Reset ke halaman 1 setiap kali melakukan search baru
+        setCurrentPage(1)
         fetchMovies()
     }
 
@@ -50,17 +52,20 @@ export default function Home() {
     useEffect(() => {
         fetchMovies()
     }, [currentPage, sort, filter])
-    return (
-        <>
-            <div
-                className="min-h-screen bg-cover bg-center bg-fixed text-white flex justify-center items-center px-6 pt-32 pb-10"
-                style={{ backgroundImage: `url(${background})` }}>
-                <meta charSet="UTF-8" />
-                <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-                {/* <Navbar /> */}
 
-                <div className="pt-32 px-23 flex justify-between gap-4">
-                    <div className="flex gap-4">
+    return (
+        /* Pembungkus Utama: menggunakan flex-col agar layout tersusun dari atas ke bawah */
+        <div
+            className="min-h-screen bg-cover bg-center bg-fixed text-white flex flex-col pt-36 pb-10 px-6 md:px-16"
+            style={{ backgroundImage: `url(${background})` }}
+        >
+            {/* <Navbar /> */}
+
+            <div className="max-w-7xl mx-auto w-full">
+                {/* 1. SECTION FILTER & SEARCH */}
+                <div className="flex flex-col md:flex-row justify-between items-center gap-4 mb-8">
+                    {/* Select Filter & Sort */}
+                    <div className="flex gap-4 w-full md:w-auto">
                         <select
                             aria-label="Genres"
                             value={filter}
@@ -68,7 +73,7 @@ export default function Home() {
                                 setFilter(e.target.value)
                                 setCurrentPage(1)
                             }}
-                            className="bg-[#0c0c0c] text-white border border-gray-500 rounded-full px-5 py-3"
+                            className="bg-[#0c0c0c] text-white border border-gray-500 rounded-full px-5 py-3 focus:outline-none"
                         >
                             <option value="">Semua genre</option>
                             <option value="1">Science Fiction</option>
@@ -85,16 +90,18 @@ export default function Home() {
                                 setSort(e.target.value)
                                 setCurrentPage(1)
                             }}
-                            className="bg-[#0c0c0c] text-white border border-gray-500 rounded-full px-5 py-3"
+                            className="bg-[#0c0c0c] text-white border border-gray-500 rounded-full px-5 py-3 focus:outline-none"
                         >
                             <option value="">Urutan default</option>
                             <option value="title">Judul A–Z</option>
                         </select>
                     </div>
-                    <form className="max-w-md ml-auto" onSubmit={handleSearch}>
+
+                    {/* Form Search */}
+                    <form className="w-full md:w-80" onSubmit={handleSearch}>
                         <label
                             htmlFor="search"
-                            className="block mb-2.5 text-sm font-semibold text-xl sr-only "
+                            className="sr-only"
                         >
                             Search
                         </label>
@@ -104,8 +111,6 @@ export default function Home() {
                                     className="w-4 h-4 text-white"
                                     aria-hidden="true"
                                     xmlns="http://www.w3.org/2000/svg"
-                                    width={24}
-                                    height={24}
                                     fill="none"
                                     viewBox="0 0 24 24"
                                 >
@@ -120,13 +125,14 @@ export default function Home() {
                             <input
                                 type="search"
                                 id="search"
-                                className="block w-full p-3 ps-9 pr-20 bg-transparent border-2 border-white text-white text-sm rounded-full placeholder:text-gray-300 focus:outline-none focus:border-white"
+                                className="block w-full p-3 ps-9 pr-20 bg-transparent border-2 border-white text-white text-sm rounded-full placeholder:text-gray-300 focus:outline-none"
                                 placeholder="search by title"
+                                value={search}
                                 onChange={(e) => setSearch(e.target.value)}
                             />
                             <button
                                 type="submit"
-                                className="absolute end-1.5 bottom-1.5 text-white bg-brand hover:bg-brand-strong box-border border border-transparent focus:ring-2 focus:ring-brand-medium shadow-xs font-semibold leading-5 rounded text-l px-3 py-1.5 focus:outline-none"
+                                className="absolute end-1.5 bottom-1.5 text-white bg-black hover:bg-gray-700 font-semibold rounded-full text-sm px-4 py-1.5 focus:outline-none"
                             >
                                 Search
                             </button>
@@ -134,12 +140,15 @@ export default function Home() {
                     </form>
                 </div>
 
-                <div className="grid grid-cols-4 grid-rows-3 px-23 pt-6 pb-23">
-                    {movies.map((movies) => {
-                        return <Card movies={movies} key={movies.id} />
+                {/* 2. SECTION GRID MOVIES */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mb-12">
+                    {movies.map((movie) => {
+                        return <Card movies={movie} key={movie.id} />
                     })}
                 </div>
-                <div className="flex justify-center items-center gap-3 pb-10">
+
+                {/* 3. SECTION PAGINATION */}
+                <div className="flex justify-center items-center gap-3">
                     <button
                         type="button"
                         disabled={currentPage <= 1}
@@ -155,10 +164,11 @@ export default function Home() {
                             type="button"
                             onClick={() => setCurrentPage(page)}
                             aria-current={page === currentPage ? "page" : undefined}
-                            className={`px-4 py-2 rounded-lg text-white border border-gray-600 ${page === currentPage
-                                ? "bg-gray-600"
-                                : "bg-[#0d0d0d] hover:bg-gray-700"
-                                }`}
+                            className={`px-4 py-2 rounded-lg text-white border border-gray-600 ${
+                                page === currentPage
+                                    ? "bg-gray-600 font-bold"
+                                    : "bg-[#0d0d0d] hover:bg-gray-700"
+                            }`}
                         >
                             {page}
                         </button>
@@ -174,7 +184,6 @@ export default function Home() {
                     </button>
                 </div>
             </div>
-
-        </>
+        </div>
     )
 }

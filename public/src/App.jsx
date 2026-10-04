@@ -8,7 +8,6 @@ function App() {
 
   return (
     <>
-      <div className="bg-[url(./assets/image.png)]">
         <BrowserRouter>
         <Routes>
           <Route element={<BaseLayout/>}>
@@ -17,7 +16,6 @@ function App() {
           </Route>
         </Routes>
       </BrowserRouter>
-      </div>
     </>
   )
 }
